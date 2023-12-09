@@ -1,0 +1,80 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "serviceconfig_proto",
+    srcs = [
+        "annotations.proto",
+        "auth.proto",
+        "backend.proto",
+        "billing.proto",
+        "config_change.proto",
+        "consumer.proto",
+        "context.proto",
+        "control.proto",
+        "distribution.proto",
+        "documentation.proto",
+        "endpoint.proto",
+        "http.proto",
+        "httpbody.proto",
+        "label.proto",
+        "log.proto",
+        "logging.proto",
+        "metric.proto",
+        "monitored_resource.proto",
+        "monitoring.proto",
+        "quota.proto",
+        "service.proto",
+        "source_info.proto",
+        "system_parameter.proto",
+        "usage.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/api/experimental:experimental_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:api_proto",
+        "@com_google_protobuf//:descriptor_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:type_proto",
+        "@com_google_protobuf//:wrappers_proto",
+    ],
+)
+
+go_proto_library(
+    name = "serviceconfig_go_proto",
+    importpath = "google.golang.org/genproto/googleapis/api/serviceconfig",
+    proto = ":serviceconfig_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/api:auth_proto",
+        "//google/api:backend_proto",
+        "//google/api:billing_proto",
+        "//google/api:context_proto",
+        "//google/api:control_proto",
+        "//google/api:documentation_proto",
+        "//google/api:endpoint_proto",
+        "//google/api:http_proto",
+        "//google/api:label_proto",
+        "//google/api:log_proto",
+        "//google/api:logging_proto",
+        "//google/api:metric_proto",
+        "//google/api:monitored_resource_proto",
+        "//google/api:monitoring_proto",
+        "//google/api:quota_proto",
+        "//google/api:source_info_proto",
+        "//google/api:system_parameter_proto",
+        "//google/api:usage_proto",
+        "//google/api/experimental:experimental_proto",
+    ],
+)
+
+go_library(
+    name = "serviceconfig",
+    embed = [":serviceconfig_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/api/serviceconfig",
+    visibility = ["//visibility:public"],
+)

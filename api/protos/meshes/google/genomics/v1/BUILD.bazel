@@ -1,0 +1,63 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "genomics_proto",
+    srcs = [
+        "annotations.proto",
+        "cigar.proto",
+        "datasets.proto",
+        "operations.proto",
+        "position.proto",
+        "range.proto",
+        "readalignment.proto",
+        "readgroup.proto",
+        "readgroupset.proto",
+        "reads.proto",
+        "references.proto",
+        "variants.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/genomics/v1:v1_proto",
+        "//google/iam/v1:v1_proto",
+        "//google/longrunning:longrunning_proto",
+        "//google/rpc:rpc_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:field_mask_proto",
+        "@com_google_protobuf//:struct_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:wrappers_proto",
+    ],
+)
+
+go_proto_library(
+    name = "genomics_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "google.golang.org/genproto/googleapis/genomics/v1",
+    proto = ":genomics_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/genomics/v1:cigar_proto",
+        "//google/genomics/v1:position_proto",
+        "//google/genomics/v1:range_proto",
+        "//google/genomics/v1:readalignment_proto",
+        "//google/genomics/v1:readgroup_proto",
+        "//google/genomics/v1:readgroupset_proto",
+        "//google/iam/v1:iam_policy_proto",
+        "//google/iam/v1:policy_proto",
+        "//google/longrunning:operations_proto",
+        "//google/rpc:status_proto",
+    ],
+)
+
+go_library(
+    name = "genomics",
+    embed = [":genomics_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/genomics/v1",
+    visibility = ["//visibility:public"],
+)

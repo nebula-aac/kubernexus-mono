@@ -1,0 +1,35 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "meshes_proto",
+    srcs = ["nexusops.proto"],
+    visibility = ["//visibility:public"],
+    deps = ["//google/api:api_proto"],
+)
+
+go_library(
+    name = "meshes",
+    srcs = [
+        "doc.go",
+        "gen.go",
+        "nexusops_drpc.pb.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/api/protos/meshes",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@io_storj_drpc//:drpc",
+        "@io_storj_drpc//drpcerr",
+        "@org_golang_google_protobuf//encoding/protojson",
+        "@org_golang_google_protobuf//proto",
+    ],
+)
+
+go_proto_library(
+    name = "meshes_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "github.com/nebula-aac/kubernexus/api/protos/meshes",
+    proto = ":meshes_proto",
+    visibility = ["//visibility:public"],
+)

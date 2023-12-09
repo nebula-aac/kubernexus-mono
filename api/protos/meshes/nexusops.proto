@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package meshes;
+
+option go_package = "github.com/nebula-aac/kubernexus/api/protos/meshes;meshes";
+
+import "google/api/annotations.proto";
+
+enum OperationCategory {
+    INSTALL = 0;
+    SAMPLE = 1;
+    CONFIGURE = 2;
+    VALIDATE = 3;
+    CUSTOM = 4;
+}
+
+enum EventSeverity {
+    INFO = 0;
+    WARN = 1;
+    ERROR = 2;
+}
+
+message CloudEventsRequest {};
+
+message CloudEventsResponse {
+    EventSeverity event_type = 1;
+    string message = 2;
+};
+
+message ErrorMessage {
+    string error_message = 1;
+}
+
+message NexusNameRequest {};
+
+message NexusNameResponse {
+    string name = 1;
+};
+
+message HelloRequest {
+    string name = 1;
+};
+
+message HelloResponse {
+    string message = 1;
+};
+
+service NexusService {
+    rpc Hello(HelloRequest) returns (HelloResponse) {
+        option (google.api.http) = { get: "/hello" };
+    }
+    rpc NexusName(NexusNameRequest) returns (NexusNameResponse);
+    rpc StreamCloudEvents(CloudEventsRequest) returns (stream CloudEventsResponse);
+};

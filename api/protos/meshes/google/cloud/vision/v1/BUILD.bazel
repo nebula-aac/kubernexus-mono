@@ -1,0 +1,44 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "vision_proto",
+    srcs = [
+        "geometry.proto",
+        "image_annotator.proto",
+        "text_annotation.proto",
+        "web_detection.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/cloud/vision/v1:v1_proto",
+        "//google/rpc:rpc_proto",
+        "//google/type:type_proto",
+    ],
+)
+
+go_proto_library(
+    name = "vision_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "google.golang.org/genproto/googleapis/cloud/vision/v1",
+    proto = ":vision_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/cloud/vision/v1:geometry_proto",
+        "//google/cloud/vision/v1:text_annotation_proto",
+        "//google/cloud/vision/v1:web_detection_proto",
+        "//google/rpc:status_proto",
+        "//google/type:color_proto",
+        "//google/type:latlng_proto",
+    ],
+)
+
+go_library(
+    name = "vision",
+    embed = [":vision_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/cloud/vision/v1",
+    visibility = ["//visibility:public"],
+)

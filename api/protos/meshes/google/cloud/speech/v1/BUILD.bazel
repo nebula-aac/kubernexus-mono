@@ -1,0 +1,37 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "speech_proto",
+    srcs = ["cloud_speech.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/longrunning:longrunning_proto",
+        "//google/rpc:rpc_proto",
+        "@com_google_protobuf//:any_proto",
+        "@com_google_protobuf//:duration_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "speech_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "google.golang.org/genproto/googleapis/cloud/speech/v1",
+    proto = ":speech_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/longrunning:operations_proto",
+        "//google/rpc:status_proto",
+    ],
+)
+
+go_library(
+    name = "speech",
+    embed = [":speech_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/cloud/speech/v1",
+    visibility = ["//visibility:public"],
+)

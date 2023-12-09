@@ -1,0 +1,42 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "datastore_proto",
+    srcs = [
+        "datastore.proto",
+        "entity.proto",
+        "query.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/datastore/v1:v1_proto",
+        "//google/type:type_proto",
+        "@com_google_protobuf//:struct_proto",
+        "@com_google_protobuf//:timestamp_proto",
+        "@com_google_protobuf//:wrappers_proto",
+    ],
+)
+
+go_proto_library(
+    name = "datastore_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "google.golang.org/genproto/googleapis/datastore/v1",
+    proto = ":datastore_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/datastore/v1:entity_proto",
+        "//google/datastore/v1:query_proto",
+        "//google/type:latlng_proto",
+    ],
+)
+
+go_library(
+    name = "datastore",
+    embed = [":datastore_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/datastore/v1",
+    visibility = ["//visibility:public"],
+)

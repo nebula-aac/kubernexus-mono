@@ -1,0 +1,42 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "dlp_proto",
+    srcs = [
+        "dlp.proto",
+        "storage.proto",
+    ],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/longrunning:longrunning_proto",
+        "//google/privacy/dlp/v2beta1:v2beta1_proto",
+        "//google/type:type_proto",
+        "@com_google_protobuf//:empty_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "dlp_go_proto",
+    compilers = ["@io_bazel_rules_go//proto:go_grpc"],
+    importpath = "google.golang.org/genproto/googleapis/privacy/dlp/v2beta1",
+    proto = ":dlp_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/longrunning:operations_proto",
+        "//google/privacy/dlp/v2beta1:storage_proto",
+        "//google/type:date_proto",
+        "//google/type:timeofday_proto",
+    ],
+)
+
+go_library(
+    name = "v2beta1",
+    embed = [":dlp_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/privacy/dlp/v2beta1",
+    visibility = ["//visibility:public"],
+)

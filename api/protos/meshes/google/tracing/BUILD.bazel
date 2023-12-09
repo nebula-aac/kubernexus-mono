@@ -1,0 +1,32 @@
+load("@rules_proto//proto:defs.bzl", "proto_library")
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+load("@io_bazel_rules_go//proto:def.bzl", "go_proto_library")
+
+proto_library(
+    name = "tracing_proto",
+    srcs = ["trace.proto"],
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:api_proto",
+        "//google/rpc:rpc_proto",
+        "@com_google_protobuf//:timestamp_proto",
+    ],
+)
+
+go_proto_library(
+    name = "tracing_go_proto",
+    importpath = "google.golang.org/genproto/googleapis/tracing/v1",
+    proto = ":tracing_proto",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//google/api:annotations_proto",
+        "//google/rpc:status_proto",
+    ],
+)
+
+go_library(
+    name = "tracing",
+    embed = [":tracing_go_proto"],
+    importpath = "google.golang.org/genproto/googleapis/tracing/v1",
+    visibility = ["//visibility:public"],
+)
