@@ -1,0 +1,23 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "logger",
+    srcs = [
+        "doc.go",
+        "formatter.go",
+        "gorm_database.go",
+        "hooks.go",
+        "logger.go",
+        "options.go",
+        "xorm_database.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/pkg/logger",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/errors",
+        "@com_github_charmbracelet_lipgloss//:lipgloss",
+        "@com_github_sirupsen_logrus//:logrus",
+        "@io_gorm_gorm//logger",
+        "@io_xorm_core//:core",
+    ],
+)
