@@ -24,7 +24,7 @@ message CloudEventsRequest {};
 
 message CloudEventsResponse {
     EventSeverity event_type = 1;
-    string message = 2;
+    string summary = 2;
 };
 
 message ErrorMessage {
