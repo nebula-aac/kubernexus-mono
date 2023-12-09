@@ -1,0 +1,1 @@
+`grpcurl -proto nexusops.proto localhost:10000 list`
