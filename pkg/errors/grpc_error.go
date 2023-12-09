@@ -2,8 +2,6 @@ package errors
 
 import (
 	"fmt"
-
-	"github.com/nebula-aac/kubernexus-mono/pkg/errors"
 )
 
 var (
@@ -14,9 +12,9 @@ var (
 )
 
 func ErrPanic(r interface{}) error {
-	return errors.New(
+	return New(
 		ErrPanicCode,
-		errors.Alert,
+		Alert,
 		[]string{fmt.Sprintf("%v", r)},
 		[]string{},
 		[]string{},
@@ -25,9 +23,9 @@ func ErrPanic(r interface{}) error {
 }
 
 func ErrGrpcListener(err error) error {
-	return errors.New(
+	return New(
 		ErrGrpcListenerCode,
-		errors.Alert,
+		Alert,
 		[]string{"Error during gRPC listener initialization"},
 		[]string{err.Error()},
 		[]string{},
@@ -36,9 +34,9 @@ func ErrGrpcListener(err error) error {
 }
 
 func ErrGrpcServer(err error) error {
-	return errors.New(
+	return New(
 		ErrGrpcServerCode,
-		errors.Alert,
+		Alert,
 		[]string{"Error during gRPC server initialization"},
 		[]string{err.Error()},
 		[]string{},
