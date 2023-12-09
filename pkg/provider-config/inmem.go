@@ -1,8 +1,8 @@
-package configprovider
+package providerconfig
 
 import (
-	"github.com/nebula-aac/kubernexus-mono/pkg/adapters"
-	adapterconfig "github.com/nebula-aac/kubernexus-mono/pkg/config"
+	adapterconfig "github.com/nebula-aac/kubernexus-mono/pkg/adapter-config"
+	adapters "github.com/nebula-aac/kubernexus-mono/pkg/nexus-adapters"
 	"github.com/nebula-aac/kubernexus-mono/pkg/utils"
 )
 

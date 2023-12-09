@@ -1,10 +1,10 @@
-package configprovider
+package providerconfig
 
 import (
 	"fmt"
 
 	"github.com/mitchellh/mapstructure"
-	adapterconfig "github.com/nebula-aac/kubernexus-mono/pkg/config"
+	adapterconfig "github.com/nebula-aac/kubernexus-mono/pkg/adapter-config"
 	"github.com/spf13/viper"
 )
 
