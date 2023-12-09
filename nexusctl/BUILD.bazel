@@ -1,0 +1,14 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_library(
+    name = "nexusctl_lib",
+    srcs = ["main.go"],
+    importpath = "github.com/bazelbuild/rules_go/tree/master/examples/basic-gazelle/nexusctl",
+    visibility = ["//visibility:private"],
+)
+
+go_binary(
+    name = "nexusctl",
+    embed = [":nexusctl_lib"],
+    visibility = ["//visibility:public"],
+)
