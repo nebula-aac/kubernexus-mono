@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "utils",
+    srcs = [
+        "marshalling.go",
+        "sort_versions.go",
+        "utils.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/pkg/utils",
+    visibility = ["//visibility:public"],
+    deps = ["//pkg/errors"],
+)
