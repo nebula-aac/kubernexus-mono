@@ -11,7 +11,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"github.com/nebula-aac/kubernexus-mono/internal/user"
+	"github.com/nebula-aac/kubernexus-mono/nexus-server/internal/user"
 	slogecho "github.com/samber/slog-echo"
 	"github.com/stretchr/testify/assert"
 )

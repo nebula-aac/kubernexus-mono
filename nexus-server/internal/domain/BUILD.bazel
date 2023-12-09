@@ -1,0 +1,26 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "domain",
+    srcs = [
+        "adapters.go",
+        "capabilities.go",
+        "channels.go",
+        "configurations.go",
+        "envs.go",
+        "events.go",
+        "extensions.go",
+        "handlers.go",
+        "local_provider.go",
+        "providers.go",
+        "remote_provider.go",
+        "user.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/nexus-server/internal/domain",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//pkg/utils",
+        "@com_github_gofrs_uuid//:uuid",
+        "@com_github_labstack_echo_v4//:echo",
+    ],
+)

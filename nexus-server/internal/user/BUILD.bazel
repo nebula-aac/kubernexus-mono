@@ -1,0 +1,19 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "user",
+    srcs = [
+        "handler.go",
+        "provider.go",
+        "repository.go",
+        "service.go",
+        "wire_gen.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/nexus-server/internal/user",
+    visibility = ["//:__subpackages__"],
+    deps = [
+        "//nexus-server/internal/domain",
+        "@com_github_google_wire//:wire",
+        "@com_github_labstack_echo_v4//:echo",
+    ],
+)

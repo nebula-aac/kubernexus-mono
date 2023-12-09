@@ -1,0 +1,3 @@
+--> Handler depends on Service
+--> Service depends on Repository
+--> Repository depends on Database Connection
