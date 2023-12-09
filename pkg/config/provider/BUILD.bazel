@@ -1,0 +1,20 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "provider",
+    srcs = [
+        "doc.go",
+        "inmem.go",
+        "provider.go",
+        "viper.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/pkg/config/provider",
+    visibility = ["//visibility:public"],
+    deps = [
+        "//pkg/adapters",
+        "//pkg/config",
+        "//pkg/utils",
+        "@com_github_mitchellh_mapstructure//:mapstructure",
+        "@com_github_spf13_viper//:viper",
+    ],
+)

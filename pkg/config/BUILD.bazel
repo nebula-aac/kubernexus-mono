@@ -1,0 +1,13 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library")
+
+go_library(
+    name = "config",
+    srcs = [
+        "config.go",
+        "doc.go",
+        "kubernetes.go",
+        "types.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/pkg/config",
+    visibility = ["//visibility:public"],
+)
