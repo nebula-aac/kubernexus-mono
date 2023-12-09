@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library", "go_test")
+
+go_library(
+    name = "nexus-server_lib",
+    srcs = [
+        "main.go",
+        "wire_gen.go",
+    ],
+    importpath = "github.com/nebula-aac/kubernexus-mono/cmd/nexus-server",
+    visibility = ["//visibility:private"],
+    deps = ["@com_github_labstack_echo_v4//:echo"],
+)
+
+go_binary(
+    name = "nexus-server",
+    embed = [":nexus-server_lib"],
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "nexus-server_test",
+    srcs = ["main_test.go"],
+    deps = [
+        "//internal/user",
+        "@com_github_labstack_echo_v4//:echo",
+        "@com_github_labstack_echo_v4//middleware",
+        "@com_github_samber_slog_echo//:slog-echo",
+        "@com_github_stretchr_testify//assert",
+    ],
+)
