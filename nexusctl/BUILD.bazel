@@ -3,8 +3,9 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 go_library(
     name = "nexusctl_lib",
     srcs = ["main.go"],
-    importpath = "github.com/bazelbuild/rules_go/tree/master/examples/basic-gazelle/nexusctl",
+    importpath = "github.com/nebula-aac/kubernexus-mono/nexusctl",
     visibility = ["//visibility:private"],
+    deps = ["//nexusctl/cmd"],
 )
 
 go_binary(
