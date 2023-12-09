@@ -5,10 +5,10 @@ import (
 	"fmt"
 	"net"
 
-	"git.galaxymesh.io/pkg/tracing"
 	"github.com/grpc-ecosystem/go-grpc-middleware/v2/interceptors/recovery"
 	"github.com/nebula-aac/kubernexus-mono/api/protos/meshes"
 	"github.com/nebula-aac/kubernexus-mono/pkg/errors"
+	"github.com/nebula-aac/kubernexus-mono/pkg/tracing"
 	"go.opentelemetry.io/contrib/instrumentation/google.golang.org/grpc/otelgrpc"
 	"go.opentelemetry.io/otel"
 	sdktrace "go.opentelemetry.io/otel/sdk/trace"
